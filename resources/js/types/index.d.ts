@@ -50,3 +50,31 @@ export type UserCardProps<
     user: User;
     favorites: Favorite[];
 };
+
+export type UserShowPageProps<
+    T extends Record<string, unknown> = Record<string, unknown>
+> = T & {
+    auth: {
+        user: User;
+    };
+    user: User;
+    favorites: Favorite[];
+};
+
+export type PokemonProperties = {
+    id: number;
+    thumbnail: string;
+    image: string;
+    name: string;
+    text?: string;
+    types: string[];
+    abilities: string[];
+    weight: number;
+    height: number;
+};
+
+export type CardWithoutLikeButtonProps = {
+    pokemon: PokemonProperties;
+    user: User;
+    authUser: User;
+};

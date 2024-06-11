@@ -7,12 +7,12 @@ import { FaHeart } from "react-icons/fa";
 import {
     getAllFavoritePokemon,
     loadFavoritePokemonDetails,
-} from "../utils/pokemon.ts";
+} from "../utils/pokemon";
 import {
     FavoritePokemonResponse,
     PokemonProperties,
     PokemonPropertiesWithCount,
-} from "../utils/type.ts";
+} from "../utils/type";
 
 export default function Rank({ auth, favorites }: FavoritePageProps) {
     const data = favorites;

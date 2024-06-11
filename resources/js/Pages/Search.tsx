@@ -8,9 +8,9 @@ import {
     getAllPokemon,
     getPokemon,
     loadPokemonDetails,
-} from "../utils/pokemon.ts";
-import { Names, PokemonProperties } from "../utils/type.ts";
-import Card from "../Components/Card.tsx";
+} from "../utils/pokemon";
+import { Names, PokemonProperties } from "../utils/type";
+import Card from "../Components/Card";
 import "./Search.css";
 
 export default function Search({ auth }: PageProps) {

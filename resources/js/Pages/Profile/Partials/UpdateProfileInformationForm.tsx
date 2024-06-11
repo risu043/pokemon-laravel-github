@@ -20,10 +20,11 @@ export default function UpdateProfileInformation({
     const user = usePage<PageProps>().props.auth.user;
 
     const { data, setData, post, errors, processing, recentlySuccessful } =
-        useForm({
+        useForm<any>({
             name: user.name,
             email: user.email,
             // picture: user.profile_photo_path,
+            // picture: null as File | null,
             _method: "patch",
         });
 
@@ -45,6 +46,8 @@ export default function UpdateProfileInformation({
             const imageUrl = URL.createObjectURL(file);
             setPreviewImage(imageUrl);
             setData("picture", file);
+        } else {
+            setData("picture", null); // 画像が選択されていない場合にnullを設定
         }
     };
 

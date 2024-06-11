@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import Card from "../../Components/Card";
 import Loading from "../../Components/Loading";
 import { FavoritePageProps } from "../../types";
@@ -8,8 +8,8 @@ import { FavoritePokemonResponse, PokemonProperties } from "../../utils/type";
 import {
     getAllFavoritePokemon,
     loadFavoritePokemonDetails,
-} from "../../utils/pokemon.ts";
-import { Link } from "@inertiajs/react";
+} from "../../utils/pokemon";
+import { Inertia } from "@inertiajs/inertia";
 
 export default function Index({ auth, favorites }: FavoritePageProps) {
     const [favoritePokemonData, setFavoritePokemonData] = useState<any[]>([]);
@@ -39,7 +39,7 @@ export default function Index({ auth, favorites }: FavoritePageProps) {
     }, []);
 
     function handleClearFavorites() {
-        post(route("favorites.clear"));
+        Inertia.post(route("favorites.clear"));
     }
 
     return (
