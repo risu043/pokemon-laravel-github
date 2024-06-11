@@ -4,7 +4,7 @@ import { FavoritePokemonResponse, PokemonProperties } from "../utils/type";
 import {
     getAllFavoritePokemon,
     loadFavoritePokemonDetails,
-} from "../utils/pokemon.ts";
+} from "../utils/pokemon";
 
 const UserCard: React.FC<UserCardProps> = ({ user, favorites }) => {
     const userImage = user.profile_photo_path
@@ -54,7 +54,9 @@ const UserCard: React.FC<UserCardProps> = ({ user, favorites }) => {
                             src={userImage}
                             alt={user.name}
                         />
-                        <h3 className="font-zenKaku w-16">{user.name}</h3>
+                        <h3 className="font-zenKaku w-16 h-12 overflow-hidden">
+                            {user.name}
+                        </h3>
                     </div>
                     <div className="flex flex-wrap gap-4">
                         {favoritePokemonData.map((pokemon) => (

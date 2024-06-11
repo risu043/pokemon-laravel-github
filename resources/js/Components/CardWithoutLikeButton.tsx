@@ -1,10 +1,14 @@
 import React from "react";
 import LikeButton from "./LikeButton";
 import { useState, useEffect } from "react";
-import { CardProps } from "../utils/type";
+import { CardWithoutLikeButtonProps } from "../types";
 import "./Card.css";
 
-const Card: React.FC<CardProps> = ({ pokemon, user, authUser }) => {
+const Card: React.FC<CardWithoutLikeButtonProps> = ({
+    pokemon,
+    user,
+    authUser,
+}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleClick = () => {

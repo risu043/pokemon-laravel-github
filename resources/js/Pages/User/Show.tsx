@@ -3,14 +3,14 @@ import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import CardWithoutLikeButton from "../../Components/CardWithoutLikeButton";
 import Loading from "../../Components/Loading";
 import { Head } from "@inertiajs/react";
-import { UsersPageProps } from "../../types";
+import { UserShowPageProps } from "../../types";
 import { FavoritePokemonResponse, PokemonProperties } from "../../utils/type";
 import {
-    getAllPokemon,
+    getAllFavoritePokemon,
     loadFavoritePokemonDetails,
-} from "../../utils/pokemon.ts";
+} from "../../utils/pokemon";
 
-export default function Show({ auth, user, favorite }: UsersPageProps) {
+export default function Show({ auth, user, favorites }: UserShowPageProps) {
     const [favoritePokemonData, setFavoritePokemonData] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -19,26 +19,27 @@ export default function Show({ auth, user, favorite }: UsersPageProps) {
         : "/images/user_image.png";
 
     useEffect(() => {
-        const favoritePokemonIds = favorite.map(
-            (pokemon) => pokemon.pokemon_id
-        );
-
-        const fetchFavoritePokemonData = async () => {
-            const res: FavoritePokemonResponse[] = await Promise.all(
-                favoritePokemonIds.map(async (id: number) => {
-                    return await getAllPokemon(
-                        `https://pokeapi.co/api/v2/pokemon/${id}`
-                    );
-                })
+        if (favorites) {
+            const favoritePokemonIds = favorites.map(
+                (pokemon) => pokemon.pokemon_id
             );
-            const data: PokemonProperties[] = await loadFavoritePokemonDetails(
-                res
-            );
-            setFavoritePokemonData(data);
-            setLoading(false);
-        };
 
-        fetchFavoritePokemonData();
+            const fetchFavoritePokemonData = async () => {
+                const res: FavoritePokemonResponse[] = await Promise.all(
+                    favoritePokemonIds.map(async (id: number) => {
+                        return await getAllFavoritePokemon(
+                            `https://pokeapi.co/api/v2/pokemon/${id}`
+                        );
+                    })
+                );
+                const data: PokemonProperties[] =
+                    await loadFavoritePokemonDetails(res);
+                setFavoritePokemonData(data);
+                setLoading(false);
+            };
+
+            fetchFavoritePokemonData();
+        }
     }, []);
 
     return (
@@ -53,30 +54,34 @@ export default function Show({ auth, user, favorite }: UsersPageProps) {
                     />
                     <h3 className="font-zenKaku">{user.name}</h3>
                 </div>
-                {favoritePokemonData.length > 0 ? (
-                    <p className="text-center">{user.name}さんのおきにいり</p>
+                {favorites && favoritePokemonData.length > 0 ? (
+                    <div>
+                        <p className="text-center">
+                            {user.name}さんのおきにいり
+                        </p>
+                        {loading ? (
+                            <div className="h-80">
+                                <Loading />
+                            </div>
+                        ) : (
+                            <div className="pokemonCardContainer container mx-auto w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-12 py-16 px-4">
+                                {favoritePokemonData.map((pokemon, i) => {
+                                    return (
+                                        <CardWithoutLikeButton
+                                            key={i}
+                                            pokemon={pokemon}
+                                            user={user}
+                                            authUser={auth.user}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
                 ) : (
                     <p className="text-center">
                         まだ{user.name}さんのおきにいりはありません
                     </p>
-                )}
-                {loading ? (
-                    <div className="h-80">
-                        <Loading />
-                    </div>
-                ) : (
-                    <div className="pokemonCardContainer container mx-auto w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-12 py-16 px-4">
-                        {favoritePokemonData.map((pokemon, i) => {
-                            return (
-                                <CardWithoutLikeButton
-                                    key={i}
-                                    pokemon={pokemon}
-                                    user={user}
-                                    authUser={auth.user}
-                                />
-                            );
-                        })}
-                    </div>
                 )}
             </div>
         </AuthenticatedLayout>
