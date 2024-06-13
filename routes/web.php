@@ -16,6 +16,8 @@ Route::get('/', function () {
     ]);
 });
 
+
+// test
 Route::get('/test', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
