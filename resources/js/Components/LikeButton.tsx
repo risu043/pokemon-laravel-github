@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import { CardProps } from "../utils/type";
-import "./LikeButton.css";
 
 const getCSRFToken = (): string | null => {
     const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
@@ -128,7 +127,11 @@ const LikeButton: React.FC<CardProps> = ({ pokemon }) => {
             <form onSubmit={liked ? unlike : like}>
                 <button type="submit">
                     <FaHeart
-                        className={liked ? "like button" : "unlike button"}
+                        className={`text-2xl transition-all mb-1 ${
+                            liked
+                                ? "text-rose-500 animate-pulse"
+                                : "text-gray-300"
+                        }`}
                     />
                 </button>
             </form>

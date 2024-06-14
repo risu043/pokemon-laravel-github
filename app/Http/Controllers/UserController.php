@@ -48,10 +48,10 @@ class UserController extends Controller
         //
         
         $user = User::find($id);
-        $favorite = Favorite::where('user_id', $id)->get();
+        $favorites = Favorite::where('user_id', $id)->get();
         return Inertia::render('User/Show', [
             'user' => $user,
-            'favorite' => $favorite,
+            'favorites' => $favorites,
         ]);
     }
 

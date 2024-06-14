@@ -11,7 +11,7 @@ import {
 } from "../utils/pokemon";
 import { Names, PokemonProperties } from "../utils/type";
 import Card from "../Components/Card";
-import "./Search.css";
+import Loading from "../Components/Loading";
 
 export default function Search({ auth }: PageProps) {
     // 全ポケモンの英名・和名
@@ -97,13 +97,15 @@ export default function Search({ auth }: PageProps) {
                             <input
                                 name="title"
                                 value={title}
-                                className="form-input focus:outline-none focus:ring-0  focus:border-gray-300"
+                                className="border-2 border-gray-300 rounded-l-lg border-r-transparent p-3 focus:outline-none focus:ring-0 focus:border-gray-300 focus:border-r-transparent"
                                 placeholder="ポケモンの名前を入力"
                                 onChange={handleTitleChange}
                             />
                             <button
-                                className={`form-button ${
-                                    title === "" ? "disabled" : "able"
+                                className={`border-2 border-blue rounded-r-lg text-xl p-3 transition duration-400 ${
+                                    title === ""
+                                        ? "bg-white text-blue"
+                                        : "bg-blue text-white"
                                 }`}
                                 disabled={title === ""}
                             >
@@ -113,7 +115,7 @@ export default function Search({ auth }: PageProps) {
                     </form>
                 </div>
                 {loading ? (
-                    <div className="loading"></div>
+                    <Loading />
                 ) : (
                     <div className="pokemonCardContainer container mx-auto w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-12 pb-16 px-4">
                         {items.map((pokemon, i) => {

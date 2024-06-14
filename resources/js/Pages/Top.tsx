@@ -3,7 +3,7 @@ import ReactPaginate from "react-paginate";
 import { getAllPokemon, loadPokemonDetails } from "..//utils/pokemon";
 import { PokemonResponse, PokemonProperties } from "../utils/type";
 import Card from "../Components/Card";
-import "./Top.css";
+import Loading from "../Components/Loading";
 
 function Top() {
     // 現在いるページのポケモンデータ
@@ -57,10 +57,10 @@ function Top() {
         <>
             <div className="App">
                 {loading ? (
-                    <div className="loading m-16"></div>
+                    <Loading />
                 ) : (
                     <>
-                        <div className="pokemonCardContainer container mx-auto w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-12 py-16 px-4">
+                        <div className="container mx-auto w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-12 py-16 px-4">
                             {items.map((pokemon, i) => {
                                 return <Card key={i} pokemon={pokemon} />;
                             })}
@@ -74,16 +74,20 @@ function Top() {
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={3}
                                 onPageChange={handlePageClick}
-                                containerClassName={"pagination"}
+                                containerClassName={
+                                    "pagination flex justify-center items-center gap-4 flex-wrap"
+                                }
                                 pageClassName={"page-item"}
-                                pageLinkClassName={"page-link"}
+                                pageLinkClassName={
+                                    "page-link relative bg-white w-14 h-14 grid place-content-center rounded-full transition duration-700"
+                                }
                                 previousClassName={"previous-item"}
                                 previousLinkClassName={"previous-link"}
                                 nextClassName={"next-item"}
                                 nextLinkClassName={"next-link"}
                                 breakClassName={"break-item"}
                                 breakLinkClassName={"break-link"}
-                                activeClassName={"active"}
+                                activeClassName={"text-gray-300"}
                                 forcePage={currentPage} // 現在のページ
                             />
                         </div>

@@ -25,6 +25,21 @@ export default {
                 blue: "#60a5fa",
                 black: "#262626",
             },
+            animation: {
+                pulse: "pulse 0.3s ease-in-out",
+                rotation: "rotation 3s linear infinite",
+            },
+            keyframes: {
+                pulse: {
+                    "0%": { transform: "scale(1)" },
+                    "50%": { transform: "scale(1.2)" },
+                    "100%": { transform: "scale(1)" },
+                },
+                rotation: {
+                    "0%": { transform: "rotate(0deg)" },
+                    "100%": { transform: "rotate(360deg)" },
+                },
+            },
         },
     },
 

@@ -54,34 +54,37 @@ export default function Show({ auth, user, favorites }: UserShowPageProps) {
                     />
                     <h3 className="font-zenKaku">{user.name}</h3>
                 </div>
-                {favorites && favoritePokemonData.length > 0 ? (
-                    <div>
-                        <p className="text-center">
-                            {user.name}さんのおきにいり
-                        </p>
-                        {loading ? (
-                            <div className="h-80">
-                                <Loading />
-                            </div>
-                        ) : (
-                            <div className="pokemonCardContainer container mx-auto w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-12 py-16 px-4">
-                                {favoritePokemonData.map((pokemon, i) => {
-                                    return (
-                                        <CardWithoutLikeButton
-                                            key={i}
-                                            pokemon={pokemon}
-                                            user={user}
-                                            authUser={auth.user}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        )}
+                {loading ? (
+                    <div className="h-80">
+                        <Loading />
                     </div>
                 ) : (
-                    <p className="text-center">
-                        まだ{user.name}さんのおきにいりはありません
-                    </p>
+                    <>
+                        {favorites && favoritePokemonData.length > 0 ? (
+                            <div>
+                                <p className="text-center">
+                                    {user.name}さんのおきにいり
+                                </p>
+
+                                <div className="container mx-auto w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-12 py-16 px-4">
+                                    {favoritePokemonData.map((pokemon, i) => {
+                                        return (
+                                            <CardWithoutLikeButton
+                                                key={i}
+                                                pokemon={pokemon}
+                                                user={user}
+                                                authUser={auth.user}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        ) : (
+                            <p className="text-center">
+                                まだ{user.name}さんのおきにいりはありません
+                            </p>
+                        )}
+                    </>
                 )}
             </div>
         </AuthenticatedLayout>

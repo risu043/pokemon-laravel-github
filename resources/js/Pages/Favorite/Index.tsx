@@ -9,7 +9,7 @@ import {
     getAllFavoritePokemon,
     loadFavoritePokemonDetails,
 } from "../../utils/pokemon";
-import { Inertia } from "@inertiajs/inertia";
+// import { Inertia } from "@inertiajs/inertia";
 
 export default function Index({ auth, favorites }: FavoritePageProps) {
     const [favoritePokemonData, setFavoritePokemonData] = useState<any[]>([]);
@@ -38,9 +38,9 @@ export default function Index({ auth, favorites }: FavoritePageProps) {
         fetchFavoritePokemonData();
     }, []);
 
-    function handleClearFavorites() {
-        Inertia.post(route("favorites.clear"));
-    }
+    // function handleClearFavorites() {
+    //     Inertia.post(route("favorites.clear"));
+    // }
 
     return (
         <AuthenticatedLayout user={auth.user}>

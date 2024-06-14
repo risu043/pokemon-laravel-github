@@ -85,7 +85,7 @@ export default function Rank({ auth, favorites }: FavoritePageProps) {
                 {loading ? (
                     <div className="loading"></div>
                 ) : (
-                    <div className="pokemonCardContainer container mx-auto w-fit max-w-4xl p-16">
+                    <div className="container mx-auto w-fit max-w-4xl p-16">
                         {favoritePokemonData.map((pokemon, i) => {
                             return (
                                 <li

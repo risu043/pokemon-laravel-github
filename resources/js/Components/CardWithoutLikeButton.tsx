@@ -2,7 +2,7 @@ import React from "react";
 import LikeButton from "./LikeButton";
 import { useState, useEffect } from "react";
 import { CardWithoutLikeButtonProps } from "../types";
-import "./Card.css";
+import Modal from "../Components/Modal";
 
 const Card: React.FC<CardWithoutLikeButtonProps> = ({
     pokemon,
@@ -11,31 +11,47 @@ const Card: React.FC<CardWithoutLikeButtonProps> = ({
 }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleClick = () => {
+    const openModal = () => {
         setIsModalOpen(true);
     };
-    const handleClickClose = () => {
+
+    const closeModal = () => {
         setIsModalOpen(false);
     };
 
-    // モダール表示に関するスクロール制御
-    useEffect(() => {
-        if (isModalOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "unset";
-        }
-    }, [isModalOpen]);
-
-    let modal;
-    if (isModalOpen) {
-        modal = (
-            <div className="overlay" onClick={handleClickClose}>
+    return (
+        <div>
+            <div
+                className="shadow-lg rounded-2xl hover:shadow-xl transition-all p-4"
+                onClick={openModal}
+            >
+                <div>
+                    <img
+                        className=" w-full"
+                        src={pokemon.thumbnail}
+                        width="160ox"
+                        height="160px"
+                        alt="{pokemon.name}"
+                    />
+                </div>
+                <h3 className="font-zenKaku text-center text-2xl mb-4">
+                    {pokemon.name}
+                </h3>
+            </div>
+            <Modal
+                show={isModalOpen}
+                maxWidth="sm"
+                closeable={true}
+                onClose={closeModal}
+            >
                 <div
-                    className="modal font-zenKaku"
+                    className="relative font-zenKaku p-4"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <button className="close-button" onClick={handleClickClose}>
+                    <button
+                        className="absolute top-5 right-5 w-10 h-10 rounded-full shadow-md text-gray-200 border-solid border border-gray-200 bg-white focus:outline-none"
+                        onClick={closeModal}
+                    >
                         ×
                     </button>
                     <div>
@@ -47,7 +63,7 @@ const Card: React.FC<CardWithoutLikeButtonProps> = ({
                             alt="{pokemon.name}"
                         />
                     </div>
-                    <div className="flex name-like-wrapper">
+                    <div className="flex gap-2 items-center">
                         <h3 className="font-zenKaku text-2xl mb-2 font-black">
                             <span className="font-gill mr-2">
                                 No.{pokemon.id}
@@ -102,30 +118,7 @@ const Card: React.FC<CardWithoutLikeButtonProps> = ({
                         </div>
                     </div>
                 </div>
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            <div
-                className="shadow-lg rounded-2xl hover:shadow-xl transition-all p-4"
-                onClick={handleClick}
-            >
-                <div>
-                    <img
-                        className=" w-full"
-                        src={pokemon.thumbnail}
-                        width="160ox"
-                        height="160px"
-                        alt="{pokemon.name}"
-                    />
-                </div>
-                <h3 className="font-zenKaku text-center text-2xl mb-4">
-                    {pokemon.name}
-                </h3>
-            </div>
-            {modal}
+            </Modal>
         </div>
     );
 };
