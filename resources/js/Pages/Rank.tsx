@@ -37,7 +37,7 @@ export default function Rank({ auth, favorites }: FavoritePageProps) {
         count,
     }));
 
-    console.log(ranking);
+    // console.log(ranking);
 
     const [favoritePokemonData, setFavoritePokemonData] = useState<
         PokemonPropertiesWithCount[]
@@ -46,7 +46,7 @@ export default function Rank({ auth, favorites }: FavoritePageProps) {
 
     const rankingPokemonIds = ranking.map((favorite) => favorite.pokemon_id);
 
-    const slicedRankingPokemonIds = rankingPokemonIds.slice(0, 5);
+    const slicedRankingPokemonIds = rankingPokemonIds.slice(0, 10);
 
     console.log(slicedRankingPokemonIds);
 
