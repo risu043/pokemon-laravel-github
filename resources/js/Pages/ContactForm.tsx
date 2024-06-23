@@ -8,17 +8,17 @@ import { FormEventHandler } from "react";
 import React from "react";
 
 export default function ContactForm() {
-    // const { data, setData, post, processing, errors } = useForm({
-    //     name: "",
-    //     email: "",
-    //     content: "",
-    // });
+    const { data, setData, post, processing, errors } = useForm({
+        name: "",
+        email: "",
+        content: "",
+    });
 
-    // const submit: FormEventHandler = (e) => {
-    //     e.preventDefault();
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
 
-    //     post(route("contact.send"));
-    // };
+        post(route("contact.send"));
+    };
 
     return (
         <GuestLayout>
@@ -26,7 +26,7 @@ export default function ContactForm() {
 
             <div className="mb-4 text-sm text-gray-600">otoiawase form</div>
 
-            {/* <form onSubmit={submit}>
+            <form onSubmit={submit}>
                 <InputLabel htmlFor="name" value="お名前" />
                 <TextInput
                     id="name"
@@ -65,15 +65,15 @@ export default function ContactForm() {
                         送信する
                     </PrimaryButton>
                 </div>
-            </form> */}
+            </form>
         </GuestLayout>
     );
 }
-// function route(routeName: string): string {
-//     switch (routeName) {
-//         case "contact.send":
-//             return "/contact";
-//         default:
-//             throw new Error(`Undefined route: ${routeName}`);
-//     }
-// }
+function route(routeName: string): string {
+    switch (routeName) {
+        case "contact.send":
+            return "/contact";
+        default:
+            throw new Error(`Undefined route: ${routeName}`);
+    }
+}
