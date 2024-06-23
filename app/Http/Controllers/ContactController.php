@@ -15,19 +15,15 @@ use Illuminate\Support\Facades\Mail;
 class ContactController extends Controller
 {
     //
-    public function create(): Response
+    public function request(): Response
     {
-        // return Inertia::render('Contact', [
-        //     'status' => session('status'),
-        // ]);
-        return Inertia::render('Contact/Contact');
+        return Inertia::render('ContactForm');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function send(Request $request): RedirectResponse
     {
         $contact = $request->all();
 
-        // 環境変数からメールアドレスを取得
         // $fromAddress = env('MAIL_FROM_ADDRESS');
         $fromAddress = 'info@risu-3-pokemon.net';
 

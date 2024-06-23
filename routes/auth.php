@@ -34,13 +34,6 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
-
-    // お問い合わせフォーム
-    Route::get('contact', [ContactController::class, 'create'])
-    ->name('contact.request');
-
-    Route::post('contact', [ContactController::class, 'store'])
-                ->name('contact.send');
 });
 
 Route::middleware('auth')->group(function () {

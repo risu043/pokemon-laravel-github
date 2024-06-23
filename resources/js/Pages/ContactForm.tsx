@@ -1,13 +1,13 @@
-import GuestLayout from "../../Layouts/GuestLayout";
-import InputError from "../../Components/InputError";
-import PrimaryButton from "../../Components/PrimaryButton";
-import TextInput from "../../Components/TextInput";
-import InputLabel from "../../Components/InputLabel";
+import GuestLayout from "../Layouts/GuestLayout";
+import InputError from "../Components/InputError";
+import PrimaryButton from "../Components/PrimaryButton";
+import TextInput from "../Components/TextInput";
+import InputLabel from "../Components/InputLabel";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 import React from "react";
 
-export default function ForgotPassword() {
+export default function ContactForm() {
     const { data, setData, post, processing, errors } = useForm({
         name: "",
         email: "",
@@ -22,7 +22,7 @@ export default function ForgotPassword() {
 
     return (
         <GuestLayout>
-            <Head title="Forgot Password" />
+            <Head title="お問い合わせ" />
 
             <div className="mb-4 text-sm text-gray-600">otoiawase form</div>
 
@@ -68,4 +68,12 @@ export default function ForgotPassword() {
             </form>
         </GuestLayout>
     );
+}
+function route(routeName: string): string {
+    switch (routeName) {
+        case "contact.send":
+            return "/contact";
+        default:
+            throw new Error(`Undefined route: ${routeName}`);
+    }
 }

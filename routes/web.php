@@ -2,6 +2,7 @@
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,6 +52,9 @@ Route::get('/favorites/clear', [FavoriteController::class, 'clear'])->middleware
 Route::resource('users', UserController::class)
     ->only(['index', 'show'])
     ->middleware(['auth', 'verified']);
+
+Route::get('/contact', [ContactController::class, 'request'])->name('contact.request');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
