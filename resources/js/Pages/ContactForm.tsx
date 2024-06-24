@@ -5,14 +5,15 @@ import TextInput from "../Components/TextInput";
 import InputLabel from "../Components/InputLabel";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
-import React from "react";
+import { Transition } from "@headlessui/react";
 
 export default function ContactForm() {
-    const { data, setData, post, processing, errors } = useForm({
-        name: "",
-        email: "",
-        content: "",
-    });
+    const { data, setData, post, processing, errors, recentlySuccessful } =
+        useForm({
+            name: "",
+            email: "",
+            content: "",
+        });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -61,6 +62,14 @@ export default function ContactForm() {
                 />
                 <InputError message={errors.content} className="mt-2" />
                 <div className="flex items-center justify-end mt-4">
+                    <Transition
+                        show={recentlySuccessful}
+                        enterFrom="opacity-0"
+                        leaveTo="opacity-0"
+                        className="transition ease-in-out"
+                    >
+                        <p className="text-sm text-gray-600">送信しました！</p>
+                    </Transition>
                     <PrimaryButton className="ms-4" disabled={processing}>
                         送信する
                     </PrimaryButton>

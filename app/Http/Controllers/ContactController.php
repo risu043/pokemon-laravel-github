@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactFormRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,15 +21,18 @@ class ContactController extends Controller
         return Inertia::render('ContactForm');
     }
 
-    public function send(Request $request): RedirectResponse
+    public function send(ContactFormRequest $request): RedirectResponse
     {
         $contact = $request->all();
 
-        // ユーザーのメールアドレスを取得
-        $userEmail = $contact['email'];
+        // ユーザーのアドレスを取得
+        $userAddress = $contact['email'];
+        
+        // 環境変数から送信元アドレスを取得
+        $fromAddress = env('MAIL_FROM_ADDRESS');
 
         // メールを送信
-        Mail::to($userEmail)->send(new ContactSendmail($contact));
+        Mail::to($userAddress)->cc($fromAddress)->send(new ContactSendmail($contact));
 
         // セッションのトークンを再生成
         $request->session()->regenerateToken();

@@ -56,23 +56,6 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'Profile updated successfully!');
     }
-//     public function update(ProfileUpdateRequest $request): RedirectResponse
-// {
-//     $request->user()->fill($request->safe()->only(['name', 'email']));
-
-//     if ($request->user()->isDirty('email')) {
-//         $request->user()->email_verified_at = null;
-//     }
-
-//     if ($request->hasFile('picture')) {
-//         $path = $request->file('picture')->store('images', 'public');
-//         $request->user()->profile_photo_path = $path;
-//     }
-
-//     $request->user()->save();
-
-//     return Redirect::route('profile.edit');
-// }
 
     /**
      * Delete the user's account.
