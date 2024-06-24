@@ -24,11 +24,11 @@ class ContactController extends Controller
     {
         $contact = $request->all();
 
-        // 環境変数から送信元アドレスを取得
-        $fromAddress = env('MAIL_FROM_ADDRESS');
+        // ユーザーのメールアドレスを取得
+        $userEmail = $contact['email'];
 
         // メールを送信
-        Mail::to($fromAddress)->send(new ContactSendmail($contact));
+        Mail::to($userEmail)->send(new ContactSendmail($contact));
 
         // セッションのトークンを再生成
         $request->session()->regenerateToken();
