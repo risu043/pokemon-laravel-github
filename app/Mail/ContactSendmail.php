@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class ContactSendmail extends Mailable
 {
@@ -33,9 +34,16 @@ class ContactSendmail extends Mailable
      */
     public function envelope(): Envelope
     {
+        $fromAddress = env('MAIL_FROM_ADDRESS');
+
         return new Envelope(
+            from: new Address($fromAddress, 'risu'),
+            replyTo: [
+                new Address($this->email, $this->name)
+        ],
             subject: 'Contact Sendmail',
         );
+        
     }
 
     /**
@@ -59,9 +67,6 @@ class ContactSendmail extends Mailable
     public function attachments(): array
     {
         return [
-            // 'name' => $this->name,
-            // 'email' => $this->email,
-            // 'content' => $this->content,
         ];
     }
 }

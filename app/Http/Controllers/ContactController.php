@@ -24,8 +24,8 @@ class ContactController extends Controller
     {
         $contact = $request->all();
 
-        // $fromAddress = env('MAIL_FROM_ADDRESS');
-        $fromAddress = 'info@risu-3-pokemon.net';
+        // 環境変数から送信元アドレスを取得
+        $fromAddress = env('MAIL_FROM_ADDRESS');
 
         // メールを送信
         Mail::to($fromAddress)->send(new ContactSendmail($contact));
