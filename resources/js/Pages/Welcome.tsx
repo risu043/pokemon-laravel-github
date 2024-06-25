@@ -335,25 +335,25 @@ export default function Welcome({ auth }: PageProps) {
                                     </p>
                                 </div>
                             </div>
-                            {auth.user ? (
+
+                            <Link
+                                href={route("register")}
+                                className="bg-blue rounded-full px-16 py-4 text-white text-xl ring-1 ring-transparent transition hover:bg-white hover:text-blue focus:outline-none border-2 border-blue block w-fit mx-auto"
+                            >
+                                図鑑であそぶ
+                            </Link>
+                            <div className="">
                                 <Link
-                                    href={route("dashboard")}
-                                    className="bg-blue rounded-full px-16 py-4 text-white text-xl ring-1 ring-transparent transition hover:bg-white hover:text-blue focus:outline-none border-2 border-blue block w-fit mx-auto"
+                                    href={route("contact.request")}
+                                    className="w-fit mx-auto block text-black mt-28 mb-8"
                                 >
-                                    図鑑であそぶ
+                                    お問い合わせ
                                 </Link>
-                            ) : (
-                                <Link
-                                    href={route("register")}
-                                    className="bg-blue rounded-full px-16 py-4 text-white text-xl ring-1 ring-transparent transition hover:bg-white hover:text-blue focus:outline-none border-2 border-blue block w-fit mx-auto"
-                                >
-                                    図鑑であそぶ
-                                </Link>
-                            )}
+                            </div>
                         </main>
 
-                        <footer className="py-16 text-center text-sm text-black dark:text-white/70">
-                            &copy; 2024 <a href="https://x.com/risu043">りす</a>
+                        <footer className="mb-16 text-center text-sm text-black dark:text-white/70">
+                            &copy; 2024 りす
                         </footer>
                     </div>
                 </div>

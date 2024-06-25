@@ -24,7 +24,6 @@ export default function UpdateProfileInformation({
             name: user.name,
             email: user.email,
             // picture: user.profile_photo_path,
-            // picture: null as File | null,
             _method: "patch",
         });
 

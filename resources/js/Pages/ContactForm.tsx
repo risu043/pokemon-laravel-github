@@ -2,6 +2,7 @@ import GuestLayout from "../Layouts/GuestLayout";
 import InputError from "../Components/InputError";
 import PrimaryButton from "../Components/PrimaryButton";
 import TextInput from "../Components/TextInput";
+import Textarea from "../Components/Textarea";
 import InputLabel from "../Components/InputLabel";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
@@ -25,8 +26,9 @@ export default function ContactForm() {
         <GuestLayout>
             <Head title="お問い合わせ" />
 
-            <div className="mb-4 text-sm text-gray-600">otoiawase form</div>
-
+            <div className="my-4 text-2xl text-center text-gray-600">
+                お問い合わせフォーム
+            </div>
             <form onSubmit={submit}>
                 <InputLabel htmlFor="name" value="お名前" />
                 <TextInput
@@ -38,8 +40,12 @@ export default function ContactForm() {
                     isFocused={true}
                     onChange={(e) => setData("name", e.target.value)}
                 />
-                <InputError message={errors.name} className="mt-2" />
-                <InputLabel htmlFor="email" value="メールアドレス" />
+                <InputError message={errors.name} className="mt-2 text-red" />
+                <InputLabel
+                    htmlFor="email"
+                    value="メールアドレス"
+                    className="mt-4"
+                />
                 <TextInput
                     id="email"
                     type="email"
@@ -49,19 +55,25 @@ export default function ContactForm() {
                     isFocused={true}
                     onChange={(e) => setData("email", e.target.value)}
                 />
-                <InputError message={errors.email} className="mt-2" />
-                <InputLabel htmlFor="content" value="お問い合わせ内容" />
-                <TextInput
+                <InputError message={errors.email} className="mt-2 text-red" />
+                <InputLabel
+                    htmlFor="content"
+                    value="お問い合わせ内容"
+                    className="mt-4"
+                />
+                <Textarea
                     id="content"
-                    type="text"
                     name="content"
                     value={data.content}
                     className="mt-1 block w-full"
                     isFocused={true}
                     onChange={(e) => setData("content", e.target.value)}
                 />
-                <InputError message={errors.content} className="mt-2" />
-                <div className="flex items-center justify-end mt-4">
+                <InputError
+                    message={errors.content}
+                    className="mt-2 text-red"
+                />
+                <div className="flex items-center justify-end mt-8">
                     <Transition
                         show={recentlySuccessful}
                         enterFrom="opacity-0"
