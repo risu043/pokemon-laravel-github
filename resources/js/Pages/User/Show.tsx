@@ -48,7 +48,7 @@ export default function Show({ auth, user, favorites }: UserShowPageProps) {
             <div>
                 <div className="w-fit mx-auto text-center p-16">
                     <img
-                        className=" w-16 h-16 rounded-full object-cover border-none mb-2"
+                        className=" w-16 h-16 mx-auto rounded-full object-cover border-none mb-2"
                         src={userImage}
                         alt={user.name}
                     />

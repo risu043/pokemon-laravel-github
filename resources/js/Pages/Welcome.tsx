@@ -9,6 +9,7 @@ import {
 } from "../utils/pokemon";
 import { FavoritePokemonResponse, PokemonProperties } from "../utils/type";
 import Loading from "../Components/Loading";
+import LikeButton from "../Components/LikeButton";
 import Modal from "../Components/Modal";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -208,7 +209,7 @@ export default function Welcome({ auth }: PageProps) {
                                                         alt="{pokemon.name}"
                                                     />
                                                 </div>
-                                                <div className="flex name-like-wrapper">
+                                                <div className="flex gap-2 items-center">
                                                     <h3 className="font-zenKaku text-2xl mb-2 font-black">
                                                         <span className="font-gill mr-2">
                                                             No.
@@ -216,6 +217,13 @@ export default function Welcome({ auth }: PageProps) {
                                                         </span>
                                                         {selectedPokemon.name}
                                                     </h3>
+                                                    {auth.user && (
+                                                        <LikeButton
+                                                            pokemon={
+                                                                selectedPokemon
+                                                            }
+                                                        />
+                                                    )}
                                                 </div>
                                                 <div className="flex">
                                                     <div>タイプ：</div>
